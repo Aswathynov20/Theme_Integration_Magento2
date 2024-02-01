@@ -1,0 +1,6 @@
+<theme xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/theme.xsd">
+<title> Magento 2 new Theme Integration </title>
+<!--  your theme's name  -->
+<parent>Magento/luma</parent>
+<!--  the parent theme, in case your theme inherits from an existing theme  -->
+</theme>

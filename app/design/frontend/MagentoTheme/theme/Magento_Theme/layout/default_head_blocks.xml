@@ -1,0 +1,9 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<head>
+<css src="css/style.css" rel="stylesheet" type="text/css"/>
+<css src="css/owl.theme.default.min.css" rel="stylesheet" type="text/css"/>
+<css src="css/owl.carousel.min.css" rel="stylesheet" type="text/css"/>
+<script src="js/jquery-3.6.0.min.js"/>
+<script src="js/owl.carousel.min.js"/>
+</head>
+</page>

@@ -1,0 +1,12 @@
+<?php
+$categoryMenu = $block->getCategoryMenu();
+?>
+<ul>
+    <?php foreach ($categoryMenu as $category): ?>
+        <li>
+            <a href="<?= $escaper->escapeHtmlAttr($category->getUrl()); ?>">
+                <?= $escaper->escapeHtml($category->getName()); ?>
+            </a>
+        </li>
+    <?php endforeach; ?>
+</ul>

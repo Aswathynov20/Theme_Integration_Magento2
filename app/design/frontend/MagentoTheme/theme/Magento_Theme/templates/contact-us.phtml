@@ -1,0 +1,43 @@
+<!-- <footer class="page-footer"> -->
+<div class="footer content">
+    <div class="guarantee-divition">
+        <div class="guarantee-content">
+            <img src="<?= $escaper->escapeHtml($block->getViewFileUrl('images/guarantee1.png')); ?>" alt="Guarantee Image 1">
+            <p>100% ORIGINAL guarantee for all products at shopyshop.com</p>
+        </div>
+        <div class="guarantee-content">
+            <img src="<?= $escaper->escapeHtml($block->getViewFileUrl('images/guarantee2.png')); ?>" alt="Guarantee Image 1">
+            <p>Return within 30 days of receiving your order</p>
+        </div>
+    </div>
+    <div class="block newsletter">
+        <div class="title"><strong>Connect with Us</strong></div>
+        <ul class="social-media-icons">
+            <li><a href="#"><img src="<?= $escaper->escapeHtml($block->getViewFileUrl('images/facebook.svg')); ?>"></a></li>
+            <li><a href="#"><img src="<?= $escaper->escapeHtml($block->getViewFileUrl('images/twitter.svg')); ?>"></a></li>
+            <li><a href="#"><img src="<?= $escaper->escapeHtml($block->getViewFileUrl('images/instagram.svg')); ?>"></a></li>
+            <li><a href="#"><img src="<?= $escaper->escapeHtml($block->getViewFileUrl('images/youtube.svg')); ?>"></a></li>
+            <li><a href="#"><img src="<?= $escaper->escapeHtml($block->getViewFileUrl('images/twitter.svg')); ?>"></a></li>
+        </ul>
+        <div class="title"><strong>Subscribe</strong></div>
+        <div class="content">
+            <p>Subscribe to stay tuned for new products and latest updates. Let's do it! </p>
+            <form class="form subscribe" novalidate="novalidate" action="#" method="post" id="newsletter-validate-detail">
+                <div class="field newsletter">
+                    <div class="control">
+                        <label for="newsletter">
+                            <span class="label">Sign Up for Our Newsletter: </span>
+                            <input name="email" type="email" id="newsletter" placeholder="" data-validate="{required:true, 'validate-email':true}">
+                        </label>
+                    </div>
+                </div>
+                <div class="actions">
+                    <button class="action subscribe primary" title="Subscribe" type="submit" aria-label="Subscribe">
+                        <span>Subscribe</span>
+                    </button>
+                </div>
+            </form>
+        </div>  
+    </div>
+</div>
+<!-- </footer> -->
