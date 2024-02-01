@@ -1,0 +1,36 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <!-- Move top.links inside the header-wrapper before top.search -->
+        <move element="top.links" destination="header-wrapper" before="top.search"/>
+        <!-- Remove unwanted blocks from the header -->
+        <referenceBlock name="header.panel" remove="true"/>
+        <referenceBlock name="authorization-link" remove="true"/>
+        <referenceBlock name="footer_links" remove="true"/>
+        <!-- Remove the label from the My Account link -->
+        <referenceBlock name="top.links" >
+            <block class="Magento\Customer\Block\Account\Link" name="my-account-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true"></argument>
+                    <argument name="class" xsi:type="string">my-account-link</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+        <referenceContainer name="footer">
+            <referenceBlock name="form.subscribe" remove="true" />
+                <block class="Magento\Framework\View\Element\Template" name="custom.contactus" template="Magento_Theme::contact-us.phtml" />
+                <block class="Magento\Framework\View\Element\Template" name="custom.aboutus" template="Magento_Theme::about-us.phtml" />
+        </referenceContainer>
+        <!-- Include contact-us.phtml in the content -->
+        <referenceContainer name="content">  
+        </referenceContainer>
+        <!-- Remove the label from the Wishlist link -->
+        <referenceBlock name="top.links">
+            <block class="Magento\Wishlist\Block\Link" name="wish-list-link">
+                <arguments>
+                    <argument name="label" xsi:type="string" translate="true"></argument>
+                    <argument name="class" xsi:type="string">icon</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>
