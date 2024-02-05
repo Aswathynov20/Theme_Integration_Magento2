@@ -1,0 +1,71 @@
+<?php
+
+use TopCategory\SliderCategory\Block\Category;
+
+$blockobj = $block->getLayout()->createBlock(Category::class);
+$category = $blockobj->getDataForPHTML();
+
+
+// var_dump($category);
+?>
+
+<script>
+require(['jquery', 'label'], function($) {
+    $('.testing').owlCarousel({
+    loop: true,
+    dots: false,
+    autoplay: true, // Use lowercase 'p'
+    autoplayTimeout: 2000,
+        responsive: {
+            0: {
+                autoWidth: true,
+                margin: 10
+            },
+            768: {
+                items: 4
+            },
+            800: {
+                items: 4
+            },
+            900: {
+                items: 5
+            },
+            1000: {
+                items: 6
+            },
+            1200: {
+                items: 7
+            },
+            1300: {
+                items: 8
+            },
+            1500: {
+                items: 9
+            }
+        }
+    })
+    // Your custom JavaScript code here, if needed
+    // Example: $('.top-category-slider').owlCarousel();
+});
+</script>
+
+<section class="top-category-section">
+    <div class="page-main">
+        <div class="content-heading">
+            <h2 class="title">Top Categories</h2>
+        </div>
+        <ul class="owl-carousel owl-theme top-category-slider owl-loaded owl-drag topcategoryslider testing">
+            <?php foreach ($category as $item): ?>
+
+            <li class="top-category-list">
+                <a href="<?= /* @noEscape */ $item['url_path'] . ".html" ?>">
+                    <figure class="top-category-image" 
+                    style="background-image: url('<?= /* @noEscape */ $item['image']; ?>');">
+                    </figure>
+                    <h4><?= /* @noEscape */ $item['url_key']; ?></h4>
+                </a>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</section>

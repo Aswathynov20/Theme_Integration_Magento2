@@ -1,0 +1,108 @@
+<?php
+// Your template file
+use Earphone\EarphoneCollection\Block\Earphone;
+$blockObj = $block->getLayout()->createBlock(Earphone::class);
+$productCollection = $blockObj->getProductCollection();
+?>
+
+<section class="products-section">
+    <div class="page-main">
+        <div class="content-heading">
+            <h2 class="title">Earphone</h2>
+        </div>
+
+        <div class="products-grid grid">
+            <ol class="product-items widget-product-grid owl-theme owl-carousel product-carousel earphone">
+                <?php foreach ($productCollection as $product):
+                var_dump($product);exit;
+                    $productId = $product->getId();
+                    $productImage = $blockObj->getImageUrlFromPath($product->getImage());
+                    // var_dump($productImage);exit;
+                    $productName = $product->getName(); 
+                    $productPrice = $product->getPrice();
+                    $specialPrice = $product->getSpecialPrice();
+                    $formKey = $blockObj->getFormKeyForWishlist();
+                    $addToCartUrl = $blockObj->getAddToCartUrl($product);                    ?>
+                    <li class="product-item">
+                        <div class="product-item-info">
+                            <a href="<?= $product->getProductUrl() ?>" class="product-item-photo">
+                                <span class="product-image-container" style="width: 240px;">
+                                    <span class="product-image-wrapper" style="padding-bottom: 125%;">
+                                        <img class="product-image-photo" src="<?= $productImage ?>" loading="lazy" width="240" height="300" alt="<?= htmlspecialchars($productName) ?>">
+                                    </span>
+                                </span>
+                            </a>
+
+                            <div class="product-item-details">
+                                <strong class="product-item-name">
+                                    <a href="<?= $product->getProductUrl() ?>" class="product-item-link">
+                                        <?= $productName ?>
+                                    </a>
+                                </strong>
+                                <div class="price-box price-final_price">
+                                    <span class="old-price">
+                                        <span>₹<?= $productPrice ?></span>
+                                    </span>
+                                    <span class="normal-price">
+                                        <span class="price-container price-final_price tax weee">
+                                            <span id="old-price-<?= $product->getId() ?>-widget-product-grid" data-price-amount="<?= $productPrice ?>" data-price-type="finalPrice" class="price-wrapper strike-through"><span class="price">₹<?= $specialPrice ?></span></span>
+                                        </span>
+                                    </span>
+                                </div>
+
+                                <div class="product-item-inner">
+                                <div class="product-item-actions">
+            `` <div class="actions-primary">
+                    <form data-role="tocart-form" data-product-sku="<?= $product->getSku() ?>" action="<?= $addToCartUrl ?>" method="post">
+                        <input type="hidden" name="product" value="<?= $productId ?>">
+                        <input type="hidden" name="uenc" value="<?= $blockObj->getUenc() ?>">
+                        <button type="submit" title="Add to Cart" class="action tocart primary">
+                            <span>Add to Cart</span>
+                        </button>
+                    </form>
+                </div>
+                         ``               <div class="actions-secondary" data-role="add-to-links">
+                                            <button id="wish-list-button-final" data-form-key="<?= $formKey ?>" data-product-id="<?= $productId ?>" class="action towishlist" data-action="add-to-wishlist" title="Add to Wish List">
+                                                <span>Add to Wish List</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ol>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- jQuery script for adding products to wishlist -->
+<script type="text/javascript">
+    require(['jquery', 'label'], function ($) {
+        $(document).ready(function () {
+            $('.earphone').owlCarousel({
+                loop: true,
+                dots: true,
+                autoplay: true,
+                autoplayTimeout: 2000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 5
+                    }
+                }
+            });
+
+           
+        });
+    });  
+
+</script> 

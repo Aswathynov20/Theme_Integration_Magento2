@@ -45,7 +45,8 @@ class Addcategorymenu extends Template
     public function getCategoryMenu()
     {
         // Create an array with category names
-        $categoryNames = ['Home','Men','Women','Offer Zone', 'Appliance', 'Body Care','Electronics',];
+        $categoryNames = ['Home','Men','Women','Offer Zone','Appliance',
+        'Body Care','Electronics',];
         // var_dump($categoryNames);
         // Create or load each category
         foreach ($categoryNames as $categoryName) {

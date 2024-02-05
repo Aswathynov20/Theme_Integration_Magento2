@@ -1,0 +1,157 @@
+<?php
+// Your template file
+use Menshoes\ProductShoes\Block\Product;
+use Magento\Framework\App\ObjectManager;
+
+$formKey = ObjectManager::getInstance()->get(\Magento\Framework\Data\Form\FormKey::class);
+// Create a product block object
+$blockObj = $block->getLayout()->createBlock(Product::class);
+// Get the product collection
+$productCollection = $blockObj->getProductCollection();
+?>
+<!-- Your existing code for including necessary stylesheets and scripts -->
+<section class="products-section">
+    <div class="page-main">
+        <div class="content-heading">
+            <h2 class="title">Mens Shoes</h2>
+        </div>
+        <div class="products-grid grid">
+            <ol class="product-items widget-product-grid owl-theme owl-carousel product-carousel menshoes">
+                <?php foreach ($productCollection as $product): ?>
+                    <?php
+                    // Extract product details
+                    $productId = $product->getId();
+                    $productImage = $blockObj->getImageUrlFromPath($product->getImage());
+                    $productName = $product->getName();
+                    $productPrice = $product->getPrice();
+                    // var_dump($productPrice);
+                    $specialPrice = $product->getSpecialPrice();
+                    // var_dump($specialPrice);
+                    $addToCartUrl = $blockObj->getAddToCartUrl($product);
+                    $simpleProductArray = $blockObj->getSimpleProductArray($productId);
+                    ?>
+                    <li class="product-item">
+                        <div class="product-item-info">
+                            <a href="<?=  /* @noEscape */ $product->getProductUrl() ?>" class="product-item-photo">
+                                <span class="product-image-container" style="width: 240px;">
+                                    <span class="product-image-wrapper" style="padding-bottom: 125%;">
+                                        <img class="product-image-photo" src="<?=  /* @noEscape */ $productImage ?>" 
+                                        loading="lazy" width="240" height="300" 
+                                        alt="<?= /* @noEscape */ $escaper->escapeHtml($productName) ?>">
+                                    </span>
+                                </span>
+                            </a>
+                            <div class="product-item-details">
+                                <strong class="product-item-name">
+                                    <a href="<?= /* @noEscape */ $product->getProductUrl() ?>" 
+                                    class="product-item-link">
+                                        <?= /* @noEscape */  $productName ?>
+                                    </a>
+                                </strong>
+                                <div class="price-box price-final_price" data-role="priceBox" 
+                                data-product-id="1562" data-price-box="product-id-1562">
+                                       <span class="old-price">
+                                       <span>₹822.00</span>
+                                       </span>
+                                       <span class="normal-price">
+                                       <span class="price-container price-final_price tax weee">
+                                       <span id="old-price-1562-widget-product-grid" data-price-amount="22"
+                                       data-price-type="finalPrice" class="price-wrapper ">
+                                       <span class="price">₹522.00</span></span>
+                                       </span>
+                                       </span>
+                                    </div>
+                                <div class="swatch-opt-1562" data-role="swatch-option-1562"
+                                 data-rendered="true">
+                                    <div class="swatch-attribute size"
+                                     data-attribute-code="size" data-attribute-id="144">
+                                    </div>
+                                    <?php foreach ($simpleProductArray as $index => $simpleProduct): ?>
+                                        <?php
+                                        // Extract simple product details
+                                        $color = $simpleProduct['color'];
+                                        $entity_id = $simpleProduct['entity_id'];
+                                        $price = $simpleProduct['price'];
+                                        $buttonId = 'circular-swatch-' . $index;
+                                        ?>
+                                        <!-- Display circular color swatch -->
+                                        <button id="<?= /* @noEscape */ $buttonId ?>"
+                                         class="swatch-attribute color circular-swatch" 
+                                        style="background: <?=  /* @noEscape */ $color ?> 
+                                        no-repeat center; background-size: initial;"
+                                            data-attribute-code="color"
+                                             data-attribute-id="<?= /* @noEscape */  $simpleProduct['color'] ?>"
+                                            data-entity-id="<?= /* @noEscape */  $entity_id ?>"
+                                            data-form-key="<?=  /* @noEscape */ $formKey->getFormKey() ?>"
+                                            data-price="<?=  /* @noEscape */ $price ?>">
+                                            <!-- Render your color options here based on $simpleProduct['options'] -->
+                                        </button>
+                                    <?php endforeach; ?>
+                                </div>
+                                <!-- Product actions -->
+                                <div class="product-item-inner">
+                                    <div class="product-item-actions">
+                                        <div class="actions-primary">
+                                            <form data-role="tocart-form" 
+                                               data-product-sku="<?=  /* @noEscape */ $product->getSku() ?>" 
+                                                action="<?=  /* @noEscape */ $addToCartUrl ?>" method="post">
+                                                <input type="hidden" name="product"
+                                                 value="<?=  /* @noEscape */ $productId ?>">
+                                                <input type="hidden" name="uenc" 
+                                                value="<?=  /* @noEscape */ $blockObj->getUenc() ?>">
+                                                <input type="hidden" name="form_key"
+                                                 value="<?=  /* @noEscape */ $formKey->getFormKey() ?>"> 
+                                                <!-- Include the form_key -->
+                                                <button type="submit" title="Add to Cart"
+                                                 class="action tocart primary">
+                                                    <span>Add to Cart</span>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class="actions-secondary" data-role="add-to-links">
+                                            <!-- Add to Wishlist button -->
+                                            <button id="wish-list-button-final" 
+                                            data-form-key="<?=  /* @noEscape */ $formKey->getFormKey() ?>"
+                                             data-product-id="<?=  /* @noEscape */ $productId ?>"
+                                              class="action towishlist"
+                                             data-action="add-to-wishlist" title="Add to Wish List">
+                                                <span>Add to Wish List</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                <?php endforeach; ?>
+            </ol>
+        </div>
+    </div>
+</section>
+<!-- Your existing code for including any additional scripts or closing HTML tags -->
+
+
+<!-- jQuery script for adding products to wishlist -->
+<script>
+    require(['jquery', 'label'], function ($) {
+        $(document).ready(function () {
+            $('.menshoes').owlCarousel({
+                loop: true,
+                dots: true,
+                autoplay: false,
+                autoplayTimeout: 2000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 5
+                    }
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,51 @@
+<?php
+/** @var \TopBrands\BrandsList\Block\Adminhtml\Grid\AddRow $blockObj */
+$blockObj = $block->getLayout()->createBlock(\TopBrands\BrandsList\Block\Adminhtml\Grid\AddRow::class);
+$brands = $blockObj->getDataForPHTML();
+?>
+
+
+<section class="top-brands-section">
+    <div class="page-main">
+        <div class="content-heading">
+            <h2 class="title">Top brands</h2>
+        </div>
+        <ul class="owl-carousel owl-theme top-brands-slider owl-loaded owl-drag top-brands">
+            <?php foreach ($brands as $brand): ?>
+            <li class="top-brands-list">
+                <a href="<?= /* @noEscape */  $blockObj->getUrlForBrands($brand) ?>">
+                    <figure class="top-brands-image" style="background-image:
+                            url('<?= $escaper->escapeUrl($brand->getImage()); ?>');"> </figure>
+                    <h4><?= $escaper->escapeHtml($brand->getTitle()); ?></h4>
+                </a>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+</section>
+<script>
+    require(['jquery', 'label'], function ($) {
+        $(document).ready(function () {
+            $('.top-brands').owlCarousel({
+                loop: true,
+                dots: true,
+                autoplay: false,
+                autoplayTimeout: 2000,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 5
+                    }
+                }
+            });
+
+           
+        });
+    });  
+
+</script> 

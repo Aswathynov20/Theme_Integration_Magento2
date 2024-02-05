@@ -1,0 +1,35 @@
+<?php
+
+/** @var \BannerSlider\Slider\Block\Template $block */
+?>
+<script>
+require(['jquery', 'label'], function($) {
+    $(document).ready(function() {
+        $('.home-custom').owlCarousel({
+            loop: true,
+            nav: true,
+            dots: true,
+            items: 1,
+            autoplay: 2000,
+        });
+        // Your custom JavaScript code here, if needed
+        // Example: $('.top-category-slider').owlCarousel();
+    });
+});
+
+    // Your custom JavaScript code here, if needed
+
+</script>
+<section class="slider-section">
+    <div class="page-main">
+        <div class="owl-carousel home-custom owl-theme home-slider">
+            <div class="item"><img src="<?= $escaper->
+                            escapeHtmlAttr($block->getViewFileUrl('images/slider1.jpg')); ?>" alt="Demo"></div>
+            <div class="item"><img src="<?= $escaper->
+                            escapeHtmlAttr($block->getViewFileUrl('images/slider1.jpg')); ?>" alt="Demo"></div>
+            <div class="item"><img src="<?= $escaper->
+                            escapeHtmlAttr($block->getViewFileUrl('images/slider1.jpg')); ?>" alt="Demo"></div>
+            <!-- <div class="item"><img href="#" src="images/slider1.jpg"></div> -->
+        </div>
+    </div>
+</section>
