@@ -46,7 +46,7 @@ class AddRow extends \Magento\Backend\App\Action
             $rowData = $rowData->load($rowId);
             $rowTitle = $rowData->getTitle();
             if (!$rowData->getArticleId()) {
-                $this->messageManager->addError(__('Row data no longer exists.'));
+                $this->messageManager->addError(__('Brand data no longer exists.'));
                 $this->_redirect('topbrands/grid/rowdata');
                 return;
             }
