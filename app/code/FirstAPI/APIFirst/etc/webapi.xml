@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route url="/V1/customer/wishlist/add" method="POST">
+        <service class="FirstAPI\APIFirst\Api\WishlistInterface" method="addProductToWishlist"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+</routes>
+
+
+
+
+<!-- <?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Webapi/etc/webapi.xsd">
+    <route url="/V1/customer/resettoken/" method="GET">
+        <service class="FirstAPI\APIFirst\Api\CustomerTokenInterface" method="getToken"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+         <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+</routes> -->

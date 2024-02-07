@@ -13,30 +13,30 @@ use Magento\Cms\Block\Widget\Block;
 class Slider implements DataPatchInterface, PatchVersionInterface
 {
     /**
-
      * @var ModuleDataSetupInterface
-
      */
     private $moduleDataSetup;
+
     /**
      * @var InstanceFactory
      */
     private $widgetInstanceFactory;
+
     /**
      * @var Reader
      */
     private $moduleReader;
 
     /**
-
      * @var BlockFactory
-
      */
     private $blockFactory;
+
     /**
      * @var \Magento\Framework\App\State
      */
     private $state;
+
     /**
      * @var File
      */
@@ -75,44 +75,48 @@ class Slider implements DataPatchInterface, PatchVersionInterface
      */
     public function apply()
     {
-        // Set Area code to prevent the Exception during setup:upgrade
-        $this->state->setAreaCode(\Magento\Framework\App\Area::AREA_ADMINHTML);
-        $this->moduleDataSetup->startSetup();
-        $cmsBlockData = [
-            'title' => 'New Banner Slider',
-            'identifier' => 'New Banner Slider',
-            'content' => '{{block class="Magento\Framework\View\Element\Template"
-            template="BannerSlider_Slider::slider.phtml"}}',
-            'is_active' => 1,
-            'stores' => [0],
-            'sort_order' => 20
-        ];
-        $cmsBlock = $this->blockFactory->create()->setData($cmsBlockData)->save();
-        $widgetData = [
-            'instance_type' => Block::class,
-            'instance_code' => 'cms_static_block',
-            'theme_id' => '7',
-            'title' => 'New Banner Slider',
-            'store_ids' => '1',
-            'widget_parameters' => '{"block_id":"'.$cmsBlock->getId().'"}',
-            'sort_order' => 0,
-            'page_groups' => [[
-                'page_id' => 1,
-                'page_group' => 'pages',
-                'layout_handle' => 'default',
-                'for' => 'all',
-                'pages' => [
-                    'page_id' => null,
-                    'layout_handle' => 'cms_index_index',
-                    'block' => 'content',
-                    'for' => 'all',
-                    'template' => 'widget/static_block/default.phtml'
-                ]
-            ]]
-        ];
-        $widget = $this->widgetInstanceFactory->create();
-        $widget->setData($widgetData)->save();
-        $this->moduleDataSetup->endSetup();
+        // Emulate Adminhtml area code
+        $this->state->emulateAreaCode(
+            \Magento\Framework\App\Area::AREA_ADMINHTML,
+            function () {
+                $this->moduleDataSetup->startSetup();
+                $cmsBlockData = [
+                    'title' => 'New Banner Slider',
+                    'identifier' => 'New Banner Slider',
+                    'content' => '{{block class="Magento\Framework\View\Element\Template"
+                        template="BannerSlider_Slider::slider.phtml"}}',
+                    'is_active' => 1,
+                    'stores' => [0],
+                    'sort_order' => 20
+                ];
+                $cmsBlock = $this->blockFactory->create()->setData($cmsBlockData)->save();
+                $widgetData = [
+                    'instance_type' => Block::class,
+                    'instance_code' => 'cms_static_block',
+                    'theme_id' => '7',
+                    'title' => 'New Banner Slider',
+                    'store_ids' => '1',
+                    'widget_parameters' => '{"block_id":"' . $cmsBlock->getId() . '"}',
+                    'sort_order' => 0,
+                    'page_groups' => [[
+                        'page_id' => 1,
+                        'page_group' => 'pages',
+                        'layout_handle' => 'default',
+                        'for' => 'all',
+                        'pages' => [
+                            'page_id' => null,
+                            'layout_handle' => 'cms_index_index',
+                            'block' => 'content',
+                            'for' => 'all',
+                            'template' => 'widget/static_block/default.phtml'
+                        ]
+                    ]]
+                ];
+                $widget = $this->widgetInstanceFactory->create();
+                $widget->setData($widgetData)->save();
+                $this->moduleDataSetup->endSetup();
+            }
+        );
     }
 
     /**
